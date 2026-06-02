@@ -104,7 +104,9 @@ After a **non–dry-run** commit, Render redeploys automatically if the service 
 | `CORS_ORIGINS` | Yes | `https://your-app.vercel.app,https://your-app-*.vercel.app` — add **production + preview** URLs after Vercel step |
 | `HUGGINGFACE_API_TOKEN` | No (prototype) | Only if `EMBED_MOCK=false` and you embed on Render |
 
-4. Deploy. Note the public URL, e.g. `https://nl-grad-api.onrender.com`.
+4. Deploy. Note the public URL, e.g. `https://chatgpt-glass-api.onrender.com`.
+
+**If blueprint sync fails:** use **`region: oregon`** (not Singapore) on the free tier. Delete the failed `chatgpt-glass-api` service under the blueprint, push latest `main`, then **Manual Sync** the blueprint again.
 
 ### 4.2 Deploy manually (without Blueprint)
 
