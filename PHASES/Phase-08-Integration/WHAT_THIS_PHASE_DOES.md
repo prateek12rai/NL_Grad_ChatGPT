@@ -7,8 +7,10 @@ We connect **all three pieces** and prove the full product works:
 | Piece | Where it lives |
 |-------|----------------|
 | Daily downloads | GitHub Actions |
-| Search + AI answers | Streamlit |
+| Search + AI answers | Render (FastAPI) |
 | Doctor verification UI | Vercel |
+
+Deploy steps: [docs/deployment-plan.md](../../docs/deployment-plan.md)
 
 We run final safety checks (privacy, no fake diagnoses, export lock) and match the **four success rules** in the original problem statement.
 

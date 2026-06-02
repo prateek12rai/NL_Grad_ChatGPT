@@ -41,10 +41,10 @@ The system is delivered in **eight sequential phases (Phase 1 → Phase 8)**. **
 | **2** | Corpus Ingestion & Scraping | DHR, ICMR, Nature (7-day) scraper | Local + GHA (dry-run) |
 | **3** | Semantic Chunking | 512-token / 80-overlap chunks | Local |
 | **4** | Vectorization & Chroma | BGE-large, L2 norm, `chroma_db` | Local / artifact |
-| **5** | RAG Backend & Groq LLM | Retrieval + generation + verification API | **Streamlit Cloud** |
+| **5** | RAG Backend & Groq LLM | Retrieval + generation + verification API | **Render** (FastAPI; Streamlit ops optional locally) |
 | **6** | HITL Frontend | Two-pane validation + export gate | **Vercel** |
 | **7** | Scheduled Ingest | Daily 6:00 AM IST pipeline | **GitHub Actions** |
-| **8** | Integration & Acceptance | E2E across all deploy targets | Streamlit + Vercel + GHA |
+| **8** | Integration & Acceptance | E2E across all deploy targets | Render + Vercel + GHA |
 
 **LLM provider:** [Groq API](https://console.groq.com/) (OpenAI-compatible), using **free-tier models with the highest token budgets** (see §11.3).  
 **Vector store:** Chroma `PersistentClient` on disk only—no cloud vector DB.
@@ -137,46 +137,46 @@ flowchart TB
         SCRAPE --> COMMIT[Commit chroma_db + manifest]
     end
 
-    subgraph streamlit [Streamlit Cloud - Backend]
-        STAPP[streamlit_app.py]
-        REST[src/api/main.py via uvicorn sidecar]
-        STAPP --> RAG[RAG Orchestrator]
-        REST --> RAG
-        RAG --> CHROMA2[(chroma_db volume)]
+    subgraph render [Render - Backend API]
+        REST[src/api/main.py FastAPI]
+        REST --> RAG[RAG Orchestrator]
+        RAG --> CHROMA2[(chroma_db from git)]
     end
 
     subgraph vercel [Vercel - Frontend]
-        NEXT[React / Next.js HITL UI]
-        NEXT -->|HTTPS BACKEND_URL| REST
+        VITE[React + Vite HITL UI]
+        VITE -->|HTTPS VITE_BACKEND_URL| REST
     end
 
-    COMMIT -->|git pull / mount| CHROMA2
-    NEXT --> GROQ2[Groq - optional direct health only]
+    COMMIT -->|git push auto-deploy| REST
 ```
 
 | Component | Platform | URL pattern | Secrets |
 |-----------|----------|-------------|---------|
-| **Scheduler** | GitHub Actions | N/A (cron) | `HUGGINGFACE_API_TOKEN`, `GROQ_API_KEY` (if ingest needs LLM) |
-| **Backend** | Streamlit Cloud | `https://<app>.streamlit.app` + API `https://<api-host>/api/v1` | `GROQ_API_KEY`, `HUGGINGFACE_API_TOKEN`, `CHROMA_PATH` |
-| **Frontend** | Vercel | `https://<project>.vercel.app` | `NEXT_PUBLIC_BACKEND_URL`, public-only keys |
+| **Scheduler** | GitHub Actions | N/A (cron) | `HUGGINGFACE_API_TOKEN` (optional; live ingest), `GROQ_API_KEY` (optional) |
+| **Backend** | **Render** | `https://<service>.onrender.com` + `/api/v1` | `GROQ_API_KEY`, `CHROMA_PATH`, `CORS_ORIGINS`, `EMBED_MOCK` (prototype) |
+| **Frontend** | Vercel | `https://<project>.vercel.app` | `VITE_BACKEND_URL` |
 
-### 3.1 Streamlit backend deployment
+**Operational guide:** [deployment-plan.md](./deployment-plan.md)
 
-- **App entry:** `backend/streamlit_app.py` — operational dashboard (health, ingest status, manual query smoke tests).
-- **REST bridge:** `src/api/main.py` (FastAPI) started alongside Streamlit in `scripts/start_backend.sh` for Streamlit Cloud **custom** or supported multi-process hosting, so the **Vercel frontend never scrapes Streamlit HTML**—it calls JSON REST only.
-- **Persistent storage:** Mount or bundle `chroma_db/` updated by GitHub Actions commits; Streamlit app reads the same path via `CHROMA_PATH`.
+### 3.1 Render backend deployment
+
+- **App entry:** `src/api/main.py` (FastAPI) — `uvicorn api.main:app` with `PYTHONPATH=src`.
+- **Blueprint:** root `render.yaml`; health check `GET /health`.
+- **Chroma:** `chroma_db/` committed by GitHub Actions; Render clones on each deploy (`CHROMA_PATH=./chroma_db`).
+- **Streamlit (optional):** `backend/streamlit_app.py` for **local ops only** — not used by Vercel in production.
 
 ### 3.2 Vercel frontend deployment
 
-- **Framework:** React + Vite or Next.js App Router (team choice; architecture assumes React + TypeScript).
-- **Environment:** `NEXT_PUBLIC_BACKEND_URL` → Streamlit-hosted FastAPI base URL.
-- **CORS:** FastAPI allows Vercel production + preview origins only.
+- **Framework:** React + Vite (`frontend/vercel.json`).
+- **Environment:** `VITE_BACKEND_URL` → Render FastAPI base URL (no trailing slash).
+- **CORS:** Set `CORS_ORIGINS` on Render to Vercel production + preview origins.
 
 ### 3.3 GitHub Actions scheduler
 
 - **Workflow:** `.github/workflows/daily-ingest.yml`
 - **Schedule:** `cron: '30 0 * * *'` (06:00 IST)
-- **Output:** Commits `chroma_db/**`, `data/manifest.json`, `data/ingest_log.jsonl` to the default branch for Streamlit to consume on next deploy/restart.
+- **Output:** Commits `chroma_db/**`, `data/manifest.json`, `data/ingest_log.jsonl` to `main`; Render auto-deploys when connected to the repo.
 
 ---
 
@@ -190,7 +190,7 @@ flowchart TB
         FE[React HITL Console]
     end
 
-    subgraph application [Application - Streamlit + API]
+    subgraph application [Application - Render FastAPI]
         RAG[RAG Orchestrator]
         VER[Verification State Manager]
         EXP[Export Gate Service]
@@ -317,7 +317,7 @@ NL_Grad_ChatGPT/
 | `CHROMA_PATH` | All | Default `./chroma_db` |
 | `CORPUS_PATH` | GHA | Default `./data/corpus` |
 | `MAX_DOCUMENTS` | GHA | Default `1000` |
-| `NEXT_PUBLIC_BACKEND_URL` | Vercel | Streamlit FastAPI base URL |
+| `VITE_BACKEND_URL` | Vercel | Render FastAPI base URL |
 
 ---
 
@@ -827,7 +827,7 @@ Single-page **CHATGPT Glass** prototype on **Vercel**, calling the FastAPI backe
 
 ### 13.1 Objectives
 
-Daily ingest at **6:00 AM IST** (`cron: '30 0 * * *'` UTC): scrape → chunk → embed → upsert → test → commit artifacts for Streamlit backend.
+Daily ingest at **6:00 AM IST** (`cron: '30 0 * * *'` UTC): scrape → chunk → embed → upsert → test → commit artifacts for Render backend (via git deploy).
 
 ### 13.2 Sub-phases
 
@@ -869,10 +869,10 @@ jobs:
 - Assert `len(manifest) <= 1000`
 - Chroma document count smoke test
 
-#### Phase 7.3 — Artifact handoff to Streamlit
+#### Phase 7.3 — Artifact handoff to Render
 
-- Document in README: Streamlit redeploy or restart after GHA commit
-- Optional: `repository_dispatch` webhook to trigger Streamlit redeploy
+- Document in [deployment-plan.md](./deployment-plan.md): Render auto-deploy on push to `main`
+- Optional: `RENDER_DEPLOY_HOOK` curl after GHA commit (see workflow comment)
 
 #### Phase 7.4 — Secrets & safety
 
@@ -897,7 +897,7 @@ jobs:
 
 ### 14.1 Objectives
 
-Validate **Streamlit + Vercel + GitHub Actions** together; enforce privacy; sign off PRD success criteria.
+Validate **Render + Vercel + GitHub Actions** together; enforce privacy; sign off PRD success criteria. See [deployment-plan.md](./deployment-plan.md).
 
 ### 14.2 Sub-phases
 
@@ -906,18 +906,18 @@ Validate **Streamlit + Vercel + GitHub Actions** together; enforce privacy; sign
 ```mermaid
 flowchart LR
     GHA[GitHub Actions ingest] -->|commit| REPO[GitHub Repo]
-    REPO -->|deploy| ST[Streamlit Backend]
+    REPO -->|deploy| RENDER[Render FastAPI]
     ST --> API[REST API]
   Vercel[Vercel Frontend] --> API
     U[User] --> Vercel
 ```
 
-- Full journey: GHA ingest → Streamlit picks up new `chroma_db` → Vercel query → verify → export
+- Full journey: GHA ingest → Render deploys new `chroma_db` → Vercel query → verify → export
 
 #### Phase 8.2 — Security & privacy audit
 
 - [ ] No PII in corpus or Chroma metadata
-- [ ] Secrets only in Streamlit / Vercel / GHA secret stores
+- [ ] Secrets only in Render / Vercel / GHA secret stores
 - [ ] CORS locked to known Vercel domains
 - [ ] Groq prompts resist basic injection (refuse out-of-scope instructions)
 
@@ -937,7 +937,7 @@ Map all four PRD criteria in §17 with evidence links in root `README.md`.
 
 | # | Test | Pass criteria |
 |---|------|---------------|
-| 8.5.1 | Full E2E production | GHA → Streamlit → Vercel path green |
+| 8.5.1 | Full E2E production | GHA → Render → Vercel path green |
 | 8.5.2 | PRD criterion 1 | Export blocked with unverified citations |
 | 8.5.3 | PRD criterion 2 | Chroma local-only reads under load |
 | 8.5.4 | PRD criterion 3 | Instant `<mark>` highlight |
@@ -960,7 +960,7 @@ Map all four PRD criteria in §17 with evidence links in root `README.md`.
 |---------|----------|
 | HF API down | Retry 3×; fail GHA job; do not commit broken index |
 | Groq 429 | Model router fallback chain; UI shows retry message |
-| Streamlit API down | Vercel shows maintenance state |
+| Render API down / cold start | Vercel shows error or slow first request |
 | Scraper HTML change | Adapter version flag; GHA fails loud |
 
 ### 15.3 Versioning
@@ -1056,10 +1056,10 @@ followed by human-readable topic lines; `suggested_queries[]` carries `label` + 
 |-------|--------|--------|
 | Scraper | Python + httpx + BeautifulSoup | GitHub Actions |
 | Chunking | Semantic + tiktoken | GitHub Actions |
-| Embeddings | BAAI/bge-large-en-v1.5 (HF Inference) | GitHub Actions + Streamlit |
+| Embeddings | BAAI/bge-large-en-v1.5 (HF Inference) | GitHub Actions (+ Render if live embed) |
 | Vector DB | Chroma PersistentClient | Disk / repo artifact |
-| LLM | **Groq API** (Llama 4 Scout primary) | Streamlit backend |
-| Backend surface | **Streamlit** + FastAPI REST bridge | Streamlit Cloud |
+| LLM | **Groq API** (Llama 4 Scout primary) | Render backend |
+| Backend surface | FastAPI REST | **Render** |
 | Frontend | React + TypeScript | **Vercel** |
 | Scheduler | GitHub Actions cron | **GitHub** |
 | Tests | pytest + Playwright | CI per phase gate |

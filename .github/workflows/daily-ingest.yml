@@ -1,4 +1,6 @@
-# Phase 7 — GitHub Actions Scheduler (docs/architecture.md §13)
+# Phase 7 — GitHub Actions Scheduler (docs/deployment-plan.md §3)
+# After non–dry-run commits, Render auto-deploys if linked to this repo.
+# Optional deploy hook: add secret RENDER_DEPLOY_HOOK and uncomment step below.
 name: Daily Medical Corpus Ingest
 
 on:
@@ -73,3 +75,7 @@ jobs:
         with:
           commit_message: 'chore(ingest): daily corpus and chroma sync'
           file_pattern: chroma_db/** data/manifest.json data/ingest_log.jsonl data/chunks/**
+
+      # - name: Trigger Render redeploy (optional)
+      #   if: ${{ github.event.inputs.dry_run != 'true' }}
+      #   run: curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"

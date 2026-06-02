@@ -143,5 +143,5 @@ Evidence: `docs/phase-reports/phase-7-gate.md`
 ## Open items / next steps
 
 - **Phase 7 gate**: run GitHub Actions once (`dry_run=true` then `dry_run=false` with `HUGGINGFACE_API_TOKEN`) and fill `phase-7-gate.md` SHA + decision.
-- **Phase 8**: end-to-end production integration (GHA → backend → Vercel) and final acceptance checklist.
+- **Phase 8**: end-to-end production integration (GHA → Render → Vercel) — see [deployment-plan.md](./deployment-plan.md).
 

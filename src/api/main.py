@@ -16,7 +16,7 @@ _origins = [o.strip() for o in settings.cors_origins.split(",") if o.strip()]
 
 app = FastAPI(
     title="India Medical RAG API",
-    description="Human-in-the-Loop medical RAG backend (Streamlit + REST bridge)",
+    description="Human-in-the-Loop medical RAG API (Render + Vercel; Streamlit ops optional locally)",
     version="0.2.0",
 )
 

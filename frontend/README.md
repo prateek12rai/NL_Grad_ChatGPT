@@ -34,10 +34,12 @@ npm run test:e2e # Playwright (mocks API; starts dev server)
 
 ## Deploy to Vercel
 
+Full checklist: [docs/deployment-plan.md](../docs/deployment-plan.md) §5.
+
 1. Import repo; set **Root Directory** to `frontend`.
-2. Framework: **Vite**.
-3. Add `VITE_BACKEND_URL` → your Streamlit/FastAPI public URL.
-4. Ensure backend `CORS_ORIGINS` includes your Vercel preview/production URL.
+2. Framework: **Vite** (`vercel.json` already configured).
+3. Add `VITE_BACKEND_URL` → your **Render** FastAPI URL (no trailing slash).
+4. On Render, set `CORS_ORIGINS` to include your Vercel production + preview URLs; redeploy API.
 
 ## User flow
 

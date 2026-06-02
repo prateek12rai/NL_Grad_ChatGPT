@@ -9,7 +9,8 @@ This folder is your **monitoring dashboard** while the project is built step by 
 3. After the phase, we run the **Deep Test** (automatic checks + a short report).
 4. Only when tests pass, we explain **Phase N+1** and ask permission again.
 
-**Source of truth for technical details:** [docs/architecture.md](../docs/architecture.md)
+**Source of truth for technical details:** [docs/architecture.md](../docs/architecture.md)  
+**Production deploy:** [docs/deployment-plan.md](../docs/deployment-plan.md)
 
 ## Free & fast (always)
 
@@ -30,7 +31,7 @@ Details: [architecture.md §2.3](../docs/architecture.md#23-free--fast-alignment
 | [Phase-02-Scraping](./Phase-02-Scraping/) | Download medical documents from 3 websites |
 | [Phase-03-Chunking](./Phase-03-Chunking/) | Split documents into searchable pieces |
 | [Phase-04-Embedding](./Phase-04-Embedding/) | Turn pieces into numbers stored on your disk |
-| [Phase-05-Backend](./Phase-05-Backend/) | Brain: search + Groq answers (Streamlit) |
+| [Phase-05-Backend](./Phase-05-Backend/) | Brain: search + Groq answers (Render / FastAPI) |
 | [Phase-06-Frontend](./Phase-06-Frontend/) | Screen for doctors to verify sources (Vercel) |
 | [Phase-07-Scheduler](./Phase-07-Scheduler/) | Daily auto-update at 6 AM IST (GitHub) |
 | [Phase-08-Integration](./Phase-08-Integration/) | Connect everything and final sign-off |

@@ -102,10 +102,13 @@ pytest tests/phase1/ -v
 | `HUGGINGFACE_API_TOKEN` | Embeddings in scheduled ingest |
 | `GROQ_API_KEY` | Optional LLM steps in pipeline |
 
-## Deployment map
+## Deployment
+
+**Step-by-step plan:** [docs/deployment-plan.md](docs/deployment-plan.md)
 
 | Component | Platform |
 |-----------|----------|
-| Scheduler | GitHub Actions |
-| Backend + API | Streamlit Cloud |
-| HITL UI | Vercel (`frontend/`) |
+| Scheduler | GitHub Actions (`.github/workflows/daily-ingest.yml`) |
+| Backend API | **Render** (`render.yaml` → FastAPI) |
+| HITL UI | **Vercel** (`frontend/`) |
+| Ops dashboard (optional, local) | Streamlit (`backend/streamlit_app.py`) |

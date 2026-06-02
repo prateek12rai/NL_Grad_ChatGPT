@@ -1,0 +1,26 @@
+# Render Blueprint — FastAPI backend (see docs/deployment-plan.md)
+services:
+  - type: web
+    name: chatgpt-glass-api
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: PYTHONPATH=./src uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHONPATH
+        value: src
+      - key: CHROMA_PATH
+        value: ./chroma_db
+      - key: EMBED_MOCK
+        value: "true"
+      - key: GROQ_MOCK
+        value: "false"
+      - key: CORS_ORIGINS
+        value: http://localhost:5173,http://localhost:5174
+      - key: GROQ_API_KEY
+        sync: false
+      - key: HUGGINGFACE_API_TOKEN
+        sync: false
