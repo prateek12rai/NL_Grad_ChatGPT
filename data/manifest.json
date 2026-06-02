@@ -1,0 +1,226 @@
+{
+  "schema_version": "1",
+  "documents": [
+    {
+      "document_id": "sha256:dfdf1d53cb960fc1",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s44401-026-00098-9",
+      "document_title": "Leveraging electronic health record data for precision medicine insights: the precision medicine registry at NYU Langone Health",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:28Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_dfdf1d53cb960fc1.html",
+      "chronological_rank": 1
+    },
+    {
+      "document_id": "sha256:d3817c4019384778",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41392-026-02765-7",
+      "document_title": "Dual epitope anti-LILRB4 synthetic T-cell receptor and antigen receptor (STAR)-T-cell therapy for relapsed/refractory acute myeloid leukemia",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:27Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_d3817c4019384778.html",
+      "chronological_rank": 2
+    },
+    {
+      "document_id": "sha256:d141e5d4de08eeec",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41372-026-02728-4",
+      "document_title": "Gentrification, measures of neighborhood change, and infant mortality in Michigan",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:26Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_d141e5d4de08eeec.html",
+      "chronological_rank": 3
+    },
+    {
+      "document_id": "sha256:68ba3e8e02a743e9",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-52569-6",
+      "document_title": "Cardiometabolic multimorbidity prevalence and its socio-demographic determinants among Iranian adults: insights from the nationwide STEPS 2021",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:25Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_68ba3e8e02a743e9.html",
+      "chronological_rank": 4
+    },
+    {
+      "document_id": "sha256:01c56c7ea5f48739",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-55042-6",
+      "document_title": "DeCGAN: a diversity-enhanced CycleGAN for unpaired image-to-image translation",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:24Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_01c56c7ea5f48739.html",
+      "chronological_rank": 5
+    },
+    {
+      "document_id": "sha256:6812aa3b9ddd3f36",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-55775-4",
+      "document_title": "Predictors of knowledge and attitudes toward palliative care among patients with cancer: a cross-sectional study",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:24Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_6812aa3b9ddd3f36.html",
+      "chronological_rank": 6
+    },
+    {
+      "document_id": "sha256:b14f2ae7d0dfbdd4",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-55902-1",
+      "document_title": "Circulating ACE2 levels and ACE I/D polymorphism in severe aortic stenosis",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:23Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_b14f2ae7d0dfbdd4.html",
+      "chronological_rank": 7
+    },
+    {
+      "document_id": "sha256:2f77bf775aa85bef",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-55692-6",
+      "document_title": "A nomogram estimates postoperative urinary tract infection risk after upper urinary tract stone surgery with double-J stents",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:22Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_2f77bf775aa85bef.html",
+      "chronological_rank": 8
+    },
+    {
+      "document_id": "sha256:8cb1f45da6caeb74",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-55541-6",
+      "document_title": "Readiness of Zanzibar’s public health facilities to deliver NCD services: a cross-sectional survey toward UHC",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:21Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_8cb1f45da6caeb74.html",
+      "chronological_rank": 9
+    },
+    {
+      "document_id": "sha256:05866bb1e80c24bd",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-51724-3",
+      "document_title": "Sustained efficacy and long-term outcomes of autologous oral mucosal epithelial cell sheet transplantation for pediatric esophageal anastomotic restenosis",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:20Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_05866bb1e80c24bd.html",
+      "chronological_rank": 10
+    },
+    {
+      "document_id": "sha256:43048d9905c80687",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-54310-9",
+      "document_title": "Efficacy and safety of photothermal biomodulated platelet-rich plasma versus standard platelet-rich plasma for facial rejuvenation: a prospective split-face randomized study",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:19Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_43048d9905c80687.html",
+      "chronological_rank": 11
+    },
+    {
+      "document_id": "sha256:00c66ff40913de3c",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s43856-026-01679-3",
+      "document_title": "Evaluating the Clinical and Humanistic Impact of a Self-Care and Minor Ailment Service (MAS)",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:18Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_00c66ff40913de3c.html",
+      "chronological_rank": 12
+    },
+    {
+      "document_id": "sha256:35a7efcda8b18435",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-51801-7",
+      "document_title": "Submanifold sparse convolutional networks for automated 3D segmentation of kidneys and kidney tumours in computed tomography",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:17Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_35a7efcda8b18435.html",
+      "chronological_rank": 13
+    },
+    {
+      "document_id": "sha256:3aa0420dce7dd91b",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-55949-0",
+      "document_title": "Deep learning for automatic segmentation of the inferior alveolar nerve using a hybrid CNN–transformer framework",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:16Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_3aa0420dce7dd91b.html",
+      "chronological_rank": 14
+    },
+    {
+      "document_id": "sha256:e9086f37446ff2d7",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-55981-0",
+      "document_title": "Machine learning models for predicting postpartum convulsions using clinical indicators from PMA Ethiopia data",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:15Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_e9086f37446ff2d7.html",
+      "chronological_rank": 15
+    },
+    {
+      "document_id": "sha256:35802169629d2268",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-55844-8",
+      "document_title": "Clustering metabolic and behavioral risk factors for hypertension: evidence from a longitudinal cohort in western Iran",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:14Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_35802169629d2268.html",
+      "chronological_rank": 16
+    },
+    {
+      "document_id": "sha256:05a5e20b64a0ec65",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-54910-5",
+      "document_title": "Prediction of syncope recurrence after percutaneous closure of patent foramen ovale based on machine learning",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:13Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_05a5e20b64a0ec65.html",
+      "chronological_rank": 17
+    },
+    {
+      "document_id": "sha256:e970dc9ea6bc4fab",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-51621-9",
+      "document_title": "Radiomic analysis of abdominal non-contrast CT for identifying aortic syndrome in emergency patients",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:12Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_e970dc9ea6bc4fab.html",
+      "chronological_rank": 18
+    },
+    {
+      "document_id": "sha256:c181d6a3e1b13711",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-56443-3",
+      "document_title": "Investigating the utilization of LIME-enhanced AI and generated data for evaluating the risks associated with radial artery puncture procedures",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:11Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_c181d6a3e1b13711.html",
+      "chronological_rank": 19
+    },
+    {
+      "document_id": "sha256:f361b0aa20a5319b",
+      "source_org": "Nature",
+      "source_url": "https://www.nature.com/articles/s41598-026-56033-3",
+      "document_title": "Conditional survival patterns and individualized prognostic prediction in malignant peritoneal mesothelioma",
+      "publication_date": "2026-06-01",
+      "ingested_at": "2026-06-01T21:08:11Z",
+      "content_type": "html",
+      "local_path": "data/corpus/nature/sha256_f361b0aa20a5319b.html",
+      "chronological_rank": 20
+    }
+  ],
+  "pruned_document_ids": []
+}

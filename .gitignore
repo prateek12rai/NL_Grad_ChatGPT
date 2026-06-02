@@ -1,0 +1,30 @@
+# Environment
+.env
+.env.local
+.secrets.toml
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Data & vectors (Phase 2+ may commit chroma per architecture)
+data/corpus/
+!data/manifest.json
+!data/ingest_log.jsonl
+# NOTE: We intentionally commit chroma_db/ for the Phase 7 scheduler handoff.
+# If repo size becomes a problem later, consider Git LFS or artifact hosting.
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

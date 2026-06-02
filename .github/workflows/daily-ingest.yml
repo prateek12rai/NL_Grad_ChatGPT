@@ -1,0 +1,75 @@
+# Phase 7 — GitHub Actions Scheduler (docs/architecture.md §13)
+name: Daily Medical Corpus Ingest
+
+on:
+  schedule:
+    - cron: '30 0 * * *'   # 06:00 IST
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (offline fixture + no commit)"
+        required: false
+        default: "true"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Ingest (Nature-only)
+        env:
+          PYTHONPATH: src
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            python -m scraper.scheduler --fixture
+          else
+            python -m scraper.scheduler
+          fi
+
+      - name: Chunk documents
+        env:
+          PYTHONPATH: src
+        run: python -m pipeline.chunking.run --manifest data/manifest.json --repo-root .
+
+      - name: Embed + upsert into Chroma
+        env:
+          PYTHONPATH: src
+          CHROMA_PATH: ./chroma_db
+          HUGGINGFACE_API_TOKEN: ${{ secrets.HUGGINGFACE_API_TOKEN }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            export EMBED_MOCK=true
+          fi
+          python -m pipeline.index.chroma_upsert --repo-root .
+
+      - name: Phase 7 validations (offline, quota-safe)
+        env:
+          PYTHONPATH: src
+          EMBED_MOCK: true
+          GROQ_MOCK: true
+          CHROMA_PATH: ./chroma_db
+        run: pytest tests/phase7/ tests/phase2/test_nature_url.py -v
+
+      - name: Commit artifacts (skip on dry run)
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore(ingest): daily corpus and chroma sync'
+          file_pattern: chroma_db/** data/manifest.json data/ingest_log.jsonl data/chunks/**

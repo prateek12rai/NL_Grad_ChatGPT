@@ -1,0 +1,127 @@
+{
+  "schema_version": "1",
+  "generated_at": "2026-06-01T21:59:20Z",
+  "total_chunks": 540,
+  "documents": [
+    {
+      "document_id": "sha256:00c66ff40913de3c",
+      "chunk_file": "data/chunks/sha256_00c66ff40913de3c.jsonl",
+      "chunk_count": 25,
+      "content_hash": "sha256:e2e37056ccc10cb3"
+    },
+    {
+      "document_id": "sha256:01c56c7ea5f48739",
+      "chunk_file": "data/chunks/sha256_01c56c7ea5f48739.jsonl",
+      "chunk_count": 15,
+      "content_hash": "sha256:02fafde5cc444b0d"
+    },
+    {
+      "document_id": "sha256:05866bb1e80c24bd",
+      "chunk_file": "data/chunks/sha256_05866bb1e80c24bd.jsonl",
+      "chunk_count": 27,
+      "content_hash": "sha256:d5ffd29936a83e93"
+    },
+    {
+      "document_id": "sha256:05a5e20b64a0ec65",
+      "chunk_file": "data/chunks/sha256_05a5e20b64a0ec65.jsonl",
+      "chunk_count": 18,
+      "content_hash": "sha256:b008952298e478d9"
+    },
+    {
+      "document_id": "sha256:2f77bf775aa85bef",
+      "chunk_file": "data/chunks/sha256_2f77bf775aa85bef.jsonl",
+      "chunk_count": 20,
+      "content_hash": "sha256:34dbf7e7289b0c0b"
+    },
+    {
+      "document_id": "sha256:35802169629d2268",
+      "chunk_file": "data/chunks/sha256_35802169629d2268.jsonl",
+      "chunk_count": 19,
+      "content_hash": "sha256:0445a05b629751a8"
+    },
+    {
+      "document_id": "sha256:35a7efcda8b18435",
+      "chunk_file": "data/chunks/sha256_35a7efcda8b18435.jsonl",
+      "chunk_count": 16,
+      "content_hash": "sha256:78ac72a88a7f2671"
+    },
+    {
+      "document_id": "sha256:3aa0420dce7dd91b",
+      "chunk_file": "data/chunks/sha256_3aa0420dce7dd91b.jsonl",
+      "chunk_count": 16,
+      "content_hash": "sha256:e8c305cff38c64bc"
+    },
+    {
+      "document_id": "sha256:43048d9905c80687",
+      "chunk_file": "data/chunks/sha256_43048d9905c80687.jsonl",
+      "chunk_count": 21,
+      "content_hash": "sha256:92badfdbb7ed853b"
+    },
+    {
+      "document_id": "sha256:6812aa3b9ddd3f36",
+      "chunk_file": "data/chunks/sha256_6812aa3b9ddd3f36.jsonl",
+      "chunk_count": 19,
+      "content_hash": "sha256:60ba53ff946bab4f"
+    },
+    {
+      "document_id": "sha256:68ba3e8e02a743e9",
+      "chunk_file": "data/chunks/sha256_68ba3e8e02a743e9.jsonl",
+      "chunk_count": 18,
+      "content_hash": "sha256:83a9a4c30d114176"
+    },
+    {
+      "document_id": "sha256:8cb1f45da6caeb74",
+      "chunk_file": "data/chunks/sha256_8cb1f45da6caeb74.jsonl",
+      "chunk_count": 22,
+      "content_hash": "sha256:b80f8b178c9eb2aa"
+    },
+    {
+      "document_id": "sha256:b14f2ae7d0dfbdd4",
+      "chunk_file": "data/chunks/sha256_b14f2ae7d0dfbdd4.jsonl",
+      "chunk_count": 17,
+      "content_hash": "sha256:f5d47baa6ed3b9a6"
+    },
+    {
+      "document_id": "sha256:c181d6a3e1b13711",
+      "chunk_file": "data/chunks/sha256_c181d6a3e1b13711.jsonl",
+      "chunk_count": 17,
+      "content_hash": "sha256:3b56135630be9d5c"
+    },
+    {
+      "document_id": "sha256:d141e5d4de08eeec",
+      "chunk_file": "data/chunks/sha256_d141e5d4de08eeec.jsonl",
+      "chunk_count": 49,
+      "content_hash": "sha256:84aca097a49d9db0"
+    },
+    {
+      "document_id": "sha256:d3817c4019384778",
+      "chunk_file": "data/chunks/sha256_d3817c4019384778.jsonl",
+      "chunk_count": 123,
+      "content_hash": "sha256:040914029529c4fd"
+    },
+    {
+      "document_id": "sha256:dfdf1d53cb960fc1",
+      "chunk_file": "data/chunks/sha256_dfdf1d53cb960fc1.jsonl",
+      "chunk_count": 47,
+      "content_hash": "sha256:e3365e1b92acee14"
+    },
+    {
+      "document_id": "sha256:e9086f37446ff2d7",
+      "chunk_file": "data/chunks/sha256_e9086f37446ff2d7.jsonl",
+      "chunk_count": 18,
+      "content_hash": "sha256:6812199b9f843e42"
+    },
+    {
+      "document_id": "sha256:e970dc9ea6bc4fab",
+      "chunk_file": "data/chunks/sha256_e970dc9ea6bc4fab.jsonl",
+      "chunk_count": 16,
+      "content_hash": "sha256:13f6783e09535ae7"
+    },
+    {
+      "document_id": "sha256:f361b0aa20a5319b",
+      "chunk_file": "data/chunks/sha256_f361b0aa20a5319b.jsonl",
+      "chunk_count": 17,
+      "content_hash": "sha256:4f0d5d43d5fbbe87"
+    }
+  ]
+}

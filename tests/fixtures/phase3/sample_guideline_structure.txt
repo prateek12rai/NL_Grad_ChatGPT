@@ -1,0 +1,16 @@
+Introduction
+
+This document outlines national pulmonary tuberculosis management priorities.
+
+1. Background
+
+India bears a high burden of drug-resistant tuberculosis.
+
+CONTRAINDICATIONS
+
+For multi-drug resistant strains, administer Bedaquiline under strictly monitored DOTS context.
+Do not use with strong CYP3A4 inducers without specialist review.
+
+2. Recommendations
+
+Follow national consensus for drug-susceptible TB treatment protocols.
