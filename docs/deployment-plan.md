@@ -75,7 +75,12 @@ sequenceDiagram
 ### 3.3 Cron schedule
 
 - **Expression:** `30 0 * * *` (UTC) → **06:00 IST** daily
-- Disable or leave on `dry_run` default until you are ready for live commits.
+- **Scheduled runs** use `dry_run` automatically (fixture + mock embed + no commit) — same as manual prototype runs.
+- Manual **Run workflow** with `dry_run=false` when you want live Nature ingest + git commit.
+
+### 3.3.1 Why GitHub shows “Artifacts: 0”
+
+This workflow does **not** upload [Actions Artifacts](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/storing-workflow-data-as-artifacts). Corpus updates are saved by **committing to git** (`chroma_db/`, `data/`) when `dry_run=false`. With `dry_run=true`, the commit step is skipped — **0 artifacts is expected** and does not mean the job failed.
 
 ### 3.4 Handoff to Render
 

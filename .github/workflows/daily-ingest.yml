@@ -24,6 +24,9 @@ jobs:
   ingest:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    # Cron has no workflow_dispatch inputs — default scheduled runs to dry_run (prototype-safe).
+    env:
+      INGEST_DRY_RUN: ${{ github.event_name != 'workflow_dispatch' && 'true' || github.event.inputs.dry_run }}
     steps:
       - uses: actions/checkout@v4
 
@@ -39,7 +42,7 @@ jobs:
         env:
           PYTHONPATH: src
         run: |
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+          if [ "$INGEST_DRY_RUN" = "true" ]; then
             python -m scraper.scheduler --fixture
           else
             python -m scraper.scheduler
@@ -56,7 +59,7 @@ jobs:
           CHROMA_PATH: ./chroma_db
           HUGGINGFACE_API_TOKEN: ${{ secrets.HUGGINGFACE_API_TOKEN }}
         run: |
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+          if [ "$INGEST_DRY_RUN" = "true" ]; then
             export EMBED_MOCK=true
           fi
           python -m pipeline.index.chroma_upsert --repo-root .
@@ -70,12 +73,12 @@ jobs:
         run: pytest tests/phase7/ tests/phase2/test_nature_url.py -v
 
       - name: Commit artifacts (skip on dry run)
-        if: ${{ github.event.inputs.dry_run != 'true' }}
+        if: env.INGEST_DRY_RUN != 'true'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'chore(ingest): daily corpus and chroma sync'
           file_pattern: chroma_db/** data/manifest.json data/ingest_log.jsonl data/chunks/**
 
       # - name: Trigger Render redeploy (optional)
-      #   if: ${{ github.event.inputs.dry_run != 'true' }}
+      #   if: env.INGEST_DRY_RUN != 'true'
       #   run: curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
